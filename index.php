@@ -64,4 +64,3 @@ require_once './shared/sessions.php';
     </div>
 </section>
 <?php require_once './shared/footer.php' ?>
-
