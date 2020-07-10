@@ -28,19 +28,13 @@ require_once __DIR__ . '/sessions.php';
 
 <?php
 $menu = [
-  ['name' => 'Page 1', 'url' => '/page_1.php'],
-  ['name' => 'Page 2', 'url' => '/page_2.php'],
+  ['name' => 'Productos', 'url' => '/page_1.php'],
+  ['name' => 'Cstegorias', 'url' => '/page_2.php'],
   ['name' => 'More', 'url' => '', 'sub_menus' => [
     ['name' => 'Page 3', 'url' => '/page_3.php'],
     ['name' => 'Page 4', 'url' => '/page_4.php'],
     ['name' => 'Page 5', 'url' => '/page_5.php'],
-  ]],
-  ['name' => 'Options', 'url' => '', 'sub_menus' => [
-    ['name' => 'Page 3', 'url' => '/page_3.php'],
-    ['name' => 'Page 4', 'url' => '/page_4.php'],
-    ['name' => 'Page 5', 'url' => '/page_5.php'],
-  ]],
-];
+  ]];
 
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
   foreach ($menu as $link) {
@@ -71,7 +65,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
       <div class="navbar-item">
         <div class="buttons">
           <?php if (isset($_SESSION['user_id'])) { ?>
-            <h3><?= $_SESSION['user_email'] ?></h3>
+            <h3><?= $_SESSION['user_name'] ?></h3>
             <a class="button is-light" href="/logout.php">
               Log out
             </a>

@@ -8,33 +8,38 @@ class Categoria {
     }
     public function find($id)
     {
-        return $this->connection->runQuery('SELECT id,name,description, image, category, stock,price FROM products WHERE id = $1', [$id]);
+        return $this->connection->runQuery('SELECT id,name, father_category FROM products WHERE id = $1', [$id]);
     }
 
-    public function create($name, $description, $image, $category, $stock,$price)
+    public function create($name, $father_category)
     {
-        $this->connection->runStatement('INSERT INTO products(
-    name,description,image,category, stock, price)
-    VALUES ($1,$2,$3,$4,$5,$6)', [$name,$description, $image, $category,
+        $this->connection->runStatement('INSERT INTO categories(
+    name,father_category)
+    VALUES ($1,$2,$3,$4,$5,$6)', [$name,$father_category,
      $stock,$price]);
     }
 
     public function read()
     {
-        return $this->connection->runQuery('SELECT * FROM products ORDER BY id');
+        return $this->connection->runQuery('SELECT * FROM categories ORDER BY id');
     }
 
-    public function update($id, $name,$description, $image, $category, $stock,$price)
+    public function update($id, $name,$father_category)
     {
-        $this->connection->runStatement('UPDATE products
-    SET name=$2,description= $3,image= $4, $category = $5, stock= $6,price= $7
-    WHERE id=$1', [$id, $name,$description, $image, $category, $stock,$price]);
+        $this->connection->runStatement('UPDATE categories
+    SET name=$2,$father_category = $3
+    WHERE id=$1', [$id, $name,$father_category]);
     }
 
     public function delete($id)
     {
-        $this->connection->runStatement('DELETE FROM products
+        $freno = $this->connection->runStatement('SELECT COUNT(id) FROM categories WHERE categoria IN (SELECT category FROM products)');
+        $val = pg_fetch_result($freno, 0, 0);
+        if($val == 0){
+            $this->connection->runStatement('DELETE FROM categories
     WHERE id=$1', [$id]);
+        }
+        
     }
 
 
