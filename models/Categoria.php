@@ -8,7 +8,7 @@ class Categoria {
     }
     public function find($id)
     {
-        return $this->connection->runQuery('SELECT id,name, father_category FROM category WHERE id = $1', [$id]);
+        return $this->connection->runQuery('SELECT id,name, father_category FROM categories WHERE id = $1', [$id]);
     }
 
     public function create($name, $father_category)
@@ -32,8 +32,13 @@ class Categoria {
 
     public function delete($id)
     {
-        $this->connection->runStatement('DELETE FROM categories
+        $freno = $this->connection->runStatement('SELECT COUNT(id) FROM categories WHERE categoria IN (SELECT category FROM products)');
+        $val = pg_fetch_result($freno, 0, 0);
+        if($val == 0){
+            $this->connection->runStatement('DELETE FROM categories
     WHERE id=$1', [$id]);
+        }
+        
     }
 
 
