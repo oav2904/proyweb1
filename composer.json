@@ -1,0 +1,6 @@
+{
+    "require": {
+        "crojasaragonez/utn-db": "^1.0",
+        "phpmailer/phpmailer": "^6.1"
+    }
+}

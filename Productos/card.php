@@ -1,7 +1,7 @@
 <div class="card column is-one-quarter">
   <div class="card-content">
     <div class="media">
-    <div class="media-left">
+      <div class="media-left">
         <figure class="image is-48x48">
           <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
         </figure>
@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="content">
-        <a class="button is-link" href="/productos/update.php?id=<?=$product['id']?>">Edit</a>
-        <a class="button is-danger" href="/productos/delete.php?id=<?=$product['id']?>">Delete</a>
+      <a class="button is-link" href="/productos/update.php?id=<?= $product['id'] ?>">Edit</a>
+      <a class="button is-danger" href="/productos/delete.php?id=<?= $product['id'] ?>">Delete</a>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<form method="POST"  enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data">
     <label>Producto</label>
     <input type="text" name="name" value="<?= $product['name'] ?? '' ?>">
     <label>Descripción</label>
@@ -10,6 +10,6 @@
     <label>Precio</label>
     <input type="text" name="price" value="<?= $product['price'] ?? '' ?>">
     <label>Imagen</label>
-    <input type="file" name="image" accept="image/png, .jpeg, .jpg " value="<?= $product['imagen'] ?? '' ?>"  >
+    <input type="file" name="image" accept="image/png, .jpeg, .jpg " value="<?= $product['imagen'] ?? '' ?>">
     <button>Save</button>
 </form>

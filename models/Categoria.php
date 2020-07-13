@@ -1,6 +1,8 @@
-<?php 
+<?php
 
-class Categoria {
+class Categoria
+{
+
     private $connection;
     function __construct($connection)
     {
@@ -14,8 +16,8 @@ class Categoria {
     public function create($name, $father_category)
     {
         $this->connection->runStatement('INSERT INTO categories(
-    name,father_category)
-    VALUES ($1,$2)', [$name,$father_category]);
+        name,father_category)
+        VALUES ($1,$2)', [$name, $father_category]);
     }
 
     public function read()
@@ -26,23 +28,17 @@ class Categoria {
     public function update($id, $name, $father_category)
     {
         $this->connection->runStatement('UPDATE categories
-    SET name=$2, $father_category = $3
-    WHERE id=$1', [$id, $name,$father_category]);
+        SET name=$2, $father_category = $3
+        WHERE id=$1', [$id, $name, $father_category]);
     }
 
     public function delete($id)
     {
         $freno = $this->connection->runStatement('SELECT COUNT(id) FROM categories WHERE categoria IN (SELECT category FROM products)');
         $val = pg_fetch_result($freno, 0, 0);
-        if($val == 0){
+        if ($val == 0) {
             $this->connection->runStatement('DELETE FROM categories
-    WHERE id=$1', [$id]);
+            WHERE id=$1', [$id]);
         }
-        
     }
-
-
-
-
 }
-
