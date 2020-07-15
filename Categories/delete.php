@@ -6,7 +6,7 @@ $id = $_GET['id'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_model->delete($id);
-    return header("Location: /productos");
+    return header("Location: /products");
 }
 
 ?>
@@ -15,6 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h1>¿Esta seguro?</h1>
     <form method="POST">
         <button>Accept</button>
-        <a href="/productos">Cancel</a>
+        <a href="/products">Cancel</a>
     </form>
 </div>

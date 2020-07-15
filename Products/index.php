@@ -10,7 +10,7 @@ require_once '../shared/db.php';
         <div class="columns">
             <div class="column is-half">
                 <h1>Animals</h1>
-                <a class="button is-success" href="/productos/create.php">Nuevo Producto</a>
+                <a class="button is-success" href="/products/create.php">Nuevo Producto</a>
             </div>
             <div class="column is-half">
                 <form method="GET">
@@ -30,9 +30,9 @@ require_once '../shared/db.php';
     <hr>
     <div class="columns is-multiline">
         <?php
-        $animals = $animal_model->read($_GET['name'] ?? '');
+        $animals = $product_model->read($_GET['name'] ?? '');
         if ($animals) {
-            foreach ($animals as $animal) {
+            foreach ($products as $product) {
                 require './card.php';
             }
         }

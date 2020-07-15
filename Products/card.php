@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="content">
-      <a class="button is-link" href="/productos/update.php?id=<?= $product['id'] ?>">Edit</a>
-      <a class="button is-danger" href="/productos/delete.php?id=<?= $product['id'] ?>">Delete</a>
+      <a class="button is-link" href="/products/update.php?id=<?= $product['id'] ?>">Edit</a>
+      <a class="button is-danger" href="/products/delete.php?id=<?= $product['id'] ?>">Delete</a>
     </div>
   </div>
 </div>

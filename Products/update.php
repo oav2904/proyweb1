@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stock = $_POST['stock'] ?? '';
     $price = $_POST['price'] ?? '';
     $product_model->create($name, $description, $image, $category, $stock,$price);
-    return header("Location: /productos");
+    return header("Location: /products");
 }
 
 require_once './form.php';
