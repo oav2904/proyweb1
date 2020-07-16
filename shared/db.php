@@ -12,5 +12,5 @@ $con->connect();
 
 // Instancia de los diferentes modelos de la página
 $user_model = new User($con);
-$poduct_model= new Producto($con);
+$product_model = new Producto($con);
 $category_model= new Categoria($con);

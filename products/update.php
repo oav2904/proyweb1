@@ -3,7 +3,7 @@ require_once '../shared/header.php';
 require_once '../shared/db.php';
 
 $id = $_GET['id'] ?? '';
-$animal = $animal_model->find($id)[0];
+$product = $product_model->find($id)[0];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'] ?? '';
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $category = $_POST['category'] ?? '';
     $stock = $_POST['stock'] ?? '';
     $price = $_POST['price'] ?? '';
-    $product_model->create($name, $description, $image, $category, $stock,$price);
+    $product_model->update($id, $name, $description, $image, $stock, $price, $category);
     return header("Location: /products");
 }
 

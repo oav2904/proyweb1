@@ -3,7 +3,7 @@
 
 class User
 {
-    
+
     private $connection;
     /**
      * Metodo constructor que permite realizar las conexiones de manera sencilla
@@ -12,7 +12,7 @@ class User
      */
     function __construct($connection)
     {
-        
+
         $this->connection = $connection;
     }
 
@@ -35,7 +35,7 @@ class User
      * @param [type] $id
      * @return void id, f_name,f_lastname,s_lastname, email, password, address, phone_number, admin 
      */
-     public function find($id)
+    public function find($id)
     {
         return $this->connection->runQuery('SELECT id, f_name,f_lastname, s_lastname, email, password, address, phone_number FROM users WHERE id = $1', [$id]);
     }
@@ -52,11 +52,11 @@ class User
      * @param [type] $phone_number
      * @return void true o false según el resultado del query
      */
-    public function create($p_name, $f_lastname, $s_lastname, $email,$password, $address,$phone_number)
+    public function create($p_name, $f_lastname, $s_lastname, $email, $password, $address, $phone_number)
     {
         $this->connection->runStatement('INSERT INTO users(
         f_name,f_lastname, s_lastname, email, password, address, phone_number)
-        VALUES ($1,$2,$3,$4,$5,$6,$7)', [$p_name,$f_lastname, $s_lastname, $email, $password,$address,$phone_number]);
+        VALUES ($1,$2,$3,$4,$5,$6,$7)', [$p_name, $f_lastname, $s_lastname, $email, $password, $address, $phone_number]);
     }
 
     /**
@@ -82,11 +82,11 @@ class User
      * @param [type] $phone_number
      * @return void true o false según el resultado del query
      */
-    public function update($id, $p_name,$f_lastname, $s_lastname, $email, $password,$address,$phone_number)
+    public function update($id, $p_name, $f_lastname, $s_lastname, $email, $password, $address, $phone_number)
     {
         $this->connection->runStatement('UPDATE users
         SET f_name=$2,f_lastname= $3,s_lastname= $4, $email = $5, password= $6,address= $7, position= $8
-        WHERE id=$1', [$id, $p_name,$f_lastname, $s_lastname, $email, $password,$address,$phone_number]);
+        WHERE id=$1', [$id, $p_name, $f_lastname, $s_lastname, $email, $password, $address, $phone_number]);
     }
 
     /**
@@ -109,5 +109,4 @@ class User
     {
         return $this->connection->runQuery('SELECT COUNT(id) FROM users where admin = false');
     }
-
 }

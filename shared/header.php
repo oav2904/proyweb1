@@ -14,26 +14,28 @@ require_once __DIR__ . '/sessions.php';
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-    <?php
-     $_SESSION['user_admin'];
-     $true = 't';
-     $false = 'f';
-     if($_SESSION['user_admin'] == $true){
-      ?>
-      <a class="navbar-item" href="/page_1.php">
       <?php
-            } else {
-              ?> 
-        <a class="navbar-item" href="/page_2.php">  
-        <?php  } ?> 
-        <img src="/imgs/eshop.png">
-      </a>
+      if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+        $_SESSION['user_admin'];
+        $true = 't';
+        $false = 'f';
+        if ($_SESSION['user_admin'] == $true) {
+      ?>
+          <a class="navbar-item" href="/page_1.php">
+          <?php
+        } else {
+          ?>
+            <a class="navbar-item" href="/page_2.php">
+          <?php  }
+      } ?>
+          <img src="/imgs/eshop.png ">
+            </a>
 
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">

@@ -2,7 +2,6 @@
 
 class Categoria
 {
-
     private $connection;
     function __construct($connection)
     {
@@ -15,9 +14,15 @@ class Categoria
 
     public function create($name, $father_category)
     {
-        $this->connection->runStatement('INSERT INTO categories(
-        name,father_category)
-        VALUES ($1,$2)', [$name, $father_category]);
+        if ($father_category == null) {
+            $this->connection->runStatement('INSERT INTO categories(
+        name)
+        VALUES ($1)', [$name]);
+        } else {
+            $this->connection->runStatement('INSERT INTO categories(
+                name,father_category)
+                VALUES ($1,$2)', [$name, $father_category]);
+        }
     }
 
     public function read($name = '')
@@ -25,18 +30,24 @@ class Categoria
         $params = [];
         $sql = "SELECT * FROM categories";
         if ($name) {
-            $sql .= "WHERE name ilike $1 ";
+            $sql .= " WHERE name ilike $1 ";
             array_push($params, "%$name%");
         }
-        $sql .= "ORDER BY id";
+        $sql .= " ORDER BY id";
         return $this->connection->runQuery($sql, $params);
     }
 
     public function update($id, $name, $father_category)
     {
-        $this->connection->runStatement('UPDATE categories
-        SET name=$2, $father_category = $3
+        if ($father_category == null) {
+            $this->connection->runStatement('UPDATE categories
+         SET name= $2 
+        WHERE id=$1', [$id, $name]);
+        } else {
+            $this->connection->runStatement('UPDATE categories
+         SET name= $2, father_category = $3
         WHERE id=$1', [$id, $name, $father_category]);
+        }
     }
 
     public function delete($id)

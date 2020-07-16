@@ -9,30 +9,29 @@ require_once './shared/sessions.php';
             Login
         </h1>
 
-<?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-        $errors = '';
-        $results = $user_model->login($email, $password);
-        $true = 't';
-        $false = 'f';
-        if ($results) {
-            $_SESSION['user_id'] = $results[0]['id'];
-            $_SESSION['user_email'] = $results[0]['email'];
-            $_SESSION['user_admin'] = $results[0]['admin'];
-            if($_SESSION['user_admin'] == $true){
-                header('Location: /page_1.php');
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $errors = '';
+            $results = $user_model->login($email, $password);
+            $true = 't';
+            $false = 'f';
+            if ($results) {
+                $_SESSION['user_id'] = $results[0]['id'];
+                $_SESSION['user_email'] = $results[0]['email'];
+                $_SESSION['user_admin'] = $results[0]['admin'];
+                if ($_SESSION['user_admin'] == $true) {
+                    header('Location: /page_1.php');
+                } elseif ($_SESSION['user_admin'] == $false) {
+                    header('Location: /page_2.php');
+                }
+                exit();
+            } elseif ($email != '' || $password != '') {
+                $errors = 'invalid email and password';
             }
-            elseif($_SESSION['user_admin'] == $false){
-                header('Location: /page_2.php');
-            }
-            exit();
-        } elseif ($email != '' || $password != '') {
-            $errors = 'invalid email and password';
         }
-    }
- ?>
+        ?>
         <form method="POST" action="/">
             <p class="help is-danger"><?= $errors ?? '' ?></p>
             <div class="field">

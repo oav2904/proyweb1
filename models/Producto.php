@@ -18,20 +18,27 @@ class Producto
         $this->connection->runStatement('INSERT INTO products(
             name,description,image, stock, price,category)
             VALUES ($1,$2,$3,$4,$5,$6)', [
-            $name, $description, $image,$stock, $price, $category
+            $name, $description, $image, $stock, $price, $category
         ]);
     }
 
-    public function read()
+    public function read($name = '')
     {
-        return $this->connection->runQuery('SELECT * FROM products ORDER BY id');
+        $params = [];
+        $sql = "SELECT * FROM products";
+        if ($name) {
+            $sql .= " WHERE name ilike $1 ";
+            array_push($params, "%$name%");
+        }
+        $sql .= " ORDER BY id";
+        return $this->connection->runQuery($sql, $params);
     }
 
     public function update($id, $name, $description, $image, $stock, $price, $category)
     {
-        $this->connection->runStatement('UPDATE products
-            SET name=$2,description= $3,image= $4, stock= $5,price= $6, $category = $5
-            WHERE id=$1', [$id, $name, $description, $image, $stock, $price, $category]);
+        $this->connection->runStatement('UPDATE products 
+            SET name= $2,description= $3,image= $4, stock= $5,price= $6, category = $7
+             WHERE id= $1', [$id, $name, $description, $image, $stock, $price, $category]);
     }
 
     public function delete($id)

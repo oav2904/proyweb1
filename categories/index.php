@@ -9,7 +9,7 @@ require_once '../shared/db.php';
 
         <div class="columns">
             <div class="column is-half">
-                <h1>Animals</h1>
+                <h1>Categorías</h1>
                 <a class="button is-success" href="/categories/create.php">Nueva Categoría</a>
             </div>
             <div class="column is-half">
@@ -26,6 +26,7 @@ require_once '../shared/db.php';
     <div class="columns is-multiline">
         <?php
         $categories = $category_model->read($_GET['name'] ?? '');
+
         if ($categories) {
             foreach ($categories as $category) {
                 require './card.php';

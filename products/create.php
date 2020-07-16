@@ -10,7 +10,7 @@ $stock = $_POST['stock'] ?? '';
 $price = $_POST['price'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_model->create($name, $description, $image, $category, $stock,$price);
+    $product_model->create($name, $description, $image, $stock, $price, $category);
     return header("Location: /products");
 }
 
