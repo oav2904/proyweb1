@@ -20,9 +20,16 @@ class Categoria
         VALUES ($1,$2)', [$name, $father_category]);
     }
 
-    public function read()
+    public function read($name = '')
     {
-        return $this->connection->runQuery('SELECT * FROM categories ORDER BY id');
+        $params = [];
+        $sql = "SELECT * FROM categories";
+        if ($name) {
+            $sql .= "WHERE name ilike $1 ";
+            array_push($params, "%$name%");
+        }
+        $sql .= "ORDER BY id";
+        return $this->connection->runQuery($sql, $params);
     }
 
     public function update($id, $name, $father_category)

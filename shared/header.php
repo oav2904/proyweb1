@@ -14,7 +14,18 @@ require_once __DIR__ . '/sessions.php';
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+    <?php
+     $_SESSION['user_admin'];
+     $true = 't';
+     $false = 'f';
+     if($_SESSION['user_admin'] == $true){
+      ?>
+      <a class="navbar-item" href="/page_1.php">
+      <?php
+            } else {
+              ?> 
+        <a class="navbar-item" href="/page_2.php">  
+        <?php  } ?> 
         <img src="/imgs/eshop.png">
       </a>
 
@@ -33,8 +44,8 @@ require_once __DIR__ . '/sessions.php';
          * array de el navbar
          */
         $menu = [
-          ['name' => 'Productos', 'url' => '/page_1.php'],
-          ['name' => 'Categorias', 'url' => '/page_2.php'],
+          ['name' => 'Productos', 'url' => './products/index.php'],
+          ['name' => 'Categorias', 'url' => './categories/index.php'],
           ['name' => 'More', 'url' => '', 'sub_menus' => [
             ['name' => 'Page 3', 'url' => '/page_3.php'],
             ['name' => 'Page 4', 'url' => '/page_4.php'],

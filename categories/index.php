@@ -10,13 +10,11 @@ require_once '../shared/db.php';
         <div class="columns">
             <div class="column is-half">
                 <h1>Animals</h1>
-                <a class="button is-success" href="/categorys/create.php">Nueva Categoría</a>
+                <a class="button is-success" href="/categories/create.php">Nueva Categoría</a>
             </div>
             <div class="column is-half">
                 <form method="GET">
                     <input type="search" autofocus name="name" value="<?= $_GET['name'] ?? '' ?>">
-                    <input type="search" autofocus name="father_category" value="<?= $_GET['father_category'] ?? '' ?>">
-                    
                     <button class="button is-primary">Search</button>
                 </form>
             </div>
