@@ -27,10 +27,12 @@ require_once __DIR__ . '/sessions.php';
           ?>
             <a class="navbar-item" href="/page_2.php">
           <?php  }
-      } ?>
-          <img src="/imgs/eshop.png ">
-            </a>
+      } else{ ?>
+        <a class="navbar-item" href="/">
+        <?php }  ?>
 
+      <img src="/imgs/eshop.png">
+            </a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
