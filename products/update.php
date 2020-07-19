@@ -1,9 +1,11 @@
 <?php
 require_once '../shared/header.php';
 require_once '../shared/db.php';
+use \Gumlet\ImageResize;
 
 $id = $_GET['id'] ?? '';
 $product = $product_model->find($id)[0];
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'] ?? '';
@@ -12,7 +14,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $category = $_POST['category'] ?? '';
     $stock = $_POST['stock'] ?? '';
     $price = $_POST['price'] ?? '';
-    $product_model->update($id, $name, $description, $image, $stock, $price, $category);
+    if ($_POST) {
+        extract($_POST, EXTR_OVERWRITE);
+        if (!file_exists("fotos")) {
+            mkdir("fotos", 0777);
+        }
+    $dirSubida = "../products/fotos/$name";
+    $foto = $_FILES['image'];
+    $nomFoto = $foto['name'];
+    $nomTemp = $foto['tmp_name'];
+    $rutaSubida = "{$dirSubida}product.jpeg";
+    $extArchivo = preg_replace('/image\//', '', $foto['type']); 
+    
+    if ($extArchivo == 'jpeg' || $extArchivo == 'png' || $extArchivo == 'jpg' ) {
+        if (move_uploaded_file($nomTemp, $rutaSubida)) {
+            $images = new ImageResize($rutaSubida);
+            $image->quality_jpg = 100;
+            $images->resize(300, 300);
+            $images->save($rutaSubida);
+            $image = $rutaSubida;
+            $product_model->update($id, $name, $description, $image, $stock, $price, $category);
+        }
+    	else {
+
+    		return false;
+    	}
+    }
+    else{	
+
+    	trigger_error("Formato de imagen inválido, favor solo usar archivos jpeg, png o jpg. Gracias", E_USER_WARNING);
+    }
+    }
+    
+    
     return header("Location: /products");
 }
 

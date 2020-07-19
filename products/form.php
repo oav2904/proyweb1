@@ -1,8 +1,10 @@
+
 <section class="section">
     <div class="container">
         <h1 class="title">
             Producto
         </h1>
+        
         <form method="POST" enctype="multipart/form-data">
             <div class="field">
                 <label>Nombre producto</label>
@@ -37,7 +39,7 @@
             <div class="field">
                 <label>Imagen</label>
                 <div class="control">
-                    <input type="file" name="image" accept="image/png, .jpeg, .jpg " value="<?= $product['imagen'] ?? '' ?>">
+                    <input type="file" id="image" name="image" value="<?= $product['imagen'] ?? '' ?>">
                 </div>
             </div>
             <div class="field is-grouped">
