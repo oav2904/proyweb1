@@ -10,7 +10,10 @@ class Producto
     }
     public function find($id)
     {
-        return $this->connection->runQuery('SELECT id,name,description, image, stock,price, category FROM products WHERE id = $1', [$id]);
+        return $this->connection->runQuery('SELECT p.id,p.name as producto ,
+        p.description,p.image,p.category as category, p.stock, p.price, c.name from 
+        products as p inner join categories as c 
+        on category = c.id where p.id = $1', [$id]);
     }
 
     public function create($name, $description, $image, $stock, $price, $category)
@@ -25,12 +28,13 @@ class Producto
     public function read($name = '')
     {
         $params = [];
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT p.id,p.name as producto ,p.description,p.image, p.stock, p.price, c.name from 
+        products as p inner join categories as c on p.category = c.id";
         if ($name) {
-            $sql .= " WHERE name ilike $1 ";
+            $sql .= " WHERE p.name ilike $1 ";
             array_push($params, "%$name%");
         }
-        $sql .= " ORDER BY id";
+        $sql .= " ORDER BY p.id";
         return $this->connection->runQuery($sql, $params);
     }
 

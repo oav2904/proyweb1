@@ -12,6 +12,10 @@ class Categoria
         return $this->connection->runQuery('SELECT id,name, father_category FROM categories WHERE id = $1', [$id]);
     }
 
+    public function chargeselect()
+    {
+        return $this->connection->runQuery('SELECT id,name FROM categories');
+    }
     public function create($name, $father_category)
     {
         if ($father_category == null) {

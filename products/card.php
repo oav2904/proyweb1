@@ -1,13 +1,13 @@
 <div class="card column is-one-quarter">
   <div class="media">
     <div class="media-left">
-      <figure class="image is-480x480">
+      <figure class="image is-290x290">
         <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
       </figure>
       <div class="media-content">
+        <p class="title is-4"><?= $product['id'] ?></p>
+        <p class="title is-4"><?= $product['producto'] ?></p>
         <p class="title is-4"><?= $product['name'] ?></p>
-        <p class="title is-4"><?= $product['description'] ?></p>
-        <p class="title is-4"><?= $product['category'] ?></p>
         <p class="title is-4"><?= $product['stock'] ?></p>
         <p class="title is-4"><?= $product['price'] ?></p>
       </div>
