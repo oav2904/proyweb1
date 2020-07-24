@@ -1,25 +1,36 @@
-<?php
+<?php 
 
-use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\PHPMailer;
+  require './vendor/autoload.php';
+  require_once './shared/db.php';
 
-require '../vendor/autoload.php';
-$mail = new PHPMailer;
-$mail->isSMTP();
-$mail->SMTPDebug = 2;
-$mail->Host = 'mx1.hostinger.com';
-$mail->Port = 587;
-$mail->SMTPAuth = true;
-$mail->Username = 'test@hostinger-tutorials.com';
-$mail->Password = 'EMAIL_ACCOUNT_PASSWORD';
-$mail->setFrom('test@hostinger-tutorials.com', 'Your Name');
-$mail->addReplyTo('reply-box@hostinger-tutorials.com', 'Your Name');
-$mail->addAddress('example@gmail.com', 'Receiver Name');
-$mail->Subject = 'PHPMailer SMTP message';
-$mail->msgHTML(file_get_contents('message.html'), __DIR__);
-$mail->AltBody = 'This is a plain text message body';
-$mail->addAttachment('test.txt');
-if (!$mail->send()) {
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message sent!';
+  $mail = new PHPMailer;
+  $mail->isSMTP();
+  $mail->SMTPDebug = 2;
+  $mail->Host = 'smtp.gmail.com';
+  $mail->Port = 587;
+  $mail->SMTPSecure = 'tls';
+  $mail->SMTPAuth = true;
+  $mail->Username = '';
+  $mail->Password = '';
+  $mail->SetFrom('oscariasv@gmail.com');
+  $mail->addAddress('');
+  $mail->Subject = 'Low stock';
+  $file = fopen("archivo.txt", "w");
+  fwrite($file, "ID Producto | Nombre | Stock \r\n");
+  $mail->Body = 'This is the CV of ';
+  $stock = $argv[1];
+  $producto = $product_model->revisarStock($stock);
+  foreach($productos as $producto){
+    fwrite($file,$producto["id"] . "   " .  $producto["name"] . "  " .  $producto["stock"] . "\r\n");
 }
+fclose($file);
+  $mail->addAttachment('archivo.txt');
+
+  if(!$mail->send()){
+    echo "Error";
+
+  }
+  else{
+    echo "Send";
+  }

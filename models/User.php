@@ -37,7 +37,7 @@ class User
      */
     public function find($id)
     {
-        return $this->connection->runQuery('SELECT id, f_name,f_lastname, s_lastname, email, password, address, phone_number FROM users WHERE id = $1', [$id]);
+        return $this->connection->runQuery('SELECT f_name,f_lastname, s_lastname FROM users WHERE id = $1', [$id]);
     }
 
     /**
@@ -108,5 +108,28 @@ class User
     public function sumusers()
     {
         return $this->connection->runQuery('SELECT COUNT(id) FROM users where admin = false');
+    }
+    /**
+     * Funcion que trae el toal de productos adquiridos por un cliente
+     *
+     * @param [type] $id id edl cliente
+     * @return void
+     */
+    public function proAddforClient($id)
+    {
+        return $this->connection->runQuery('SELECT sum(d.cantidad) from detalle as d inner join factura as f on d.idfactura = f.id  
+        inner join users as u on f.cliente = u.id where u.id =$1', [$id]);
+
+    }
+
+    /**
+     * Funcion que trae el total de compras realizas por el cliente
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function proSumforClient($id)
+    {
+        return $this->connection->runQuery('SELECT sum(f.total) from factura as f inner join users as u on f.cliente = u.id where u.id = $1',[$id]);
     }
 }

@@ -9,6 +9,8 @@ require_once __DIR__ . '/db.php';
   <title><?= $title ?? 'E~Shop San Carlos' ?></title>
   <link rel="stylesheet" type="text/css" href="/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" href="../node_modules/bulma-popover/css/bulma-popover.css">
+  <link rel="stylesheet" type="text/css" href="../node_modules/bulma-popover/css/bulma-popover.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -45,39 +47,30 @@ require_once __DIR__ . '/db.php';
       <div class="navbar-start">
 
         <?php
-        /**
-         * array de el navbar
-         */
-        $menu = $category_model->chargeheader();
 
         if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
           if ($_SESSION['user_admin'] == $true) {
-            foreach ($menu as $link) {
-              /**
-               * array de el navbar
-               */
-              $menus = array(
-                'name' => $link['nameca'],
-                'url' => "../categories/index.php?namefo=" . $link['nameca']
-              );
-
-              if ($link['father_category'] == null) {
-        ?>
-              <?php
-                echo "<a class='navbar-item' href='" . $menus['url'] . "'>" . $menus['name'] . "</a>";
-              }
-              ?>
+            ?>
+            <a class="navbar-item" href="../categories/index.php">
+              Categorías
+            </a>
+            <a class="navbar-item" href="../products/index.php">
+              Productos
+            </a>
+            
             <?php
             }
-          } else { ?>
+           elseif($_SESSION['user_admin'] == $false ) { ?>
             <a class="navbar-item" href="../categories/index.php">
               Catálogo
             </a>
             <a class="navbar-item" href="../products/mostrarCarrito.php">
-              Carrito(<?php echo count($_SESSION['CARRITO'])?>)
+              Carrito(<?php  echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']) ?>)
             </a>
+            <a class="navbar-item" href="">Compras realizadas</a>
         <?php }
-        } ?>
+        }
+       ?>
 
 
       </div>

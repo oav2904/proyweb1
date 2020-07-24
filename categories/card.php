@@ -13,11 +13,23 @@
         <a class="button is-danger" href="/categories/delete.php?id=<?= $category['id'] ?>">Delete</a>
       <?php
       } elseif ($_SESSION['user_admin'] == 'f') {
+        if($category['father_category'] == null){
       ?>
-        <a class="button is-link" href="">Carrito</a>
-        <a class="button is-danger" href="">Ver</a>
+        <button class="button is-link" href="">Ver subcategorias
+          <form action="subcategories.php?id=<?php echo $category['id']?>" method="get">
+            <input type="hidden" id="id" name="id" value="<?php echo $category['id'] ?? null ?>">
+      </button>
+      <?php
+      } 
+      else{
+    
+      ?>
+       <button class="button is-link" href="">Ver productos
+          <form action="products/index.php?id=<?php echo $category['id']?>" method="get">
+            <input type="hidden" id="id" name="id" value="<?php echo $category['id'] ?? null ?>">
       <?php
       }
+    }
       ?>
     </div>
   </div>

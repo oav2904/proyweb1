@@ -4,7 +4,9 @@ require_once '../shared/db.php';
 require_once '../shared/guard.php';
 require_once '../shared/sessions.php';
 require_once './carrito.php';
-
+if($_GET){
+    $id = $_GET['id'];
+}
 
 ?>
 
@@ -35,11 +37,21 @@ require_once './carrito.php';
     <hr>
     <div class="columns is-multiline">
         <?php
+         if ($_SESSION['user_admin'] == 't') {
         $products = $product_model->read($_GET['name'] ?? '');
         if ($products) {
             foreach ($products as $product) {
                 require './card.php';
             }
+        }
+        }
+        elseif($_SESSION['user_admin'] == 'f'){
+            $products = $product_model->read($_GET['name'] ?? '');
+            if ($products) {
+            foreach ($products as $product) {
+                require './card.php';
+            }
+        }
         }
         ?>
     </div>
