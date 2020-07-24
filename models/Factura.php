@@ -70,6 +70,23 @@ class Factura
     public function totalVentas(){
         return $this->connection->runQuery('SELECT sum(total) from factura');
     }
-
+    /**
+     * Buscar factura por cliente
+     *
+     * @param [type] $idcliente
+     * @return void
+     */
+    public function find($idcliente){
+        return $this->connection->runQuery('SELECT id, fecha, total from factura where cliente = $1',[$idcliente]);
+    }
+    /**
+     * Buscar detalle de una factura
+     *
+     * @param [type] $idfactura
+     * @return void
+     */
+    public function findDetalle($idfactura){
+        return $this->connection->runQuery('SELECT descripcion , preciounitario, cantidad from detalle where idfactura = $1',[$idfactura]);
+    }
     
 }

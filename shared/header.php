@@ -67,7 +67,7 @@ require_once __DIR__ . '/db.php';
             <a class="navbar-item" href="../products/mostrarCarrito.php">
               Carrito(<?php  echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']) ?>)
             </a>
-            <a class="navbar-item" href="">Compras realizadas</a>
+            <a class="navbar-item" href="../products/comprasrealizadas.php">Compras realizadas</a>
         <?php }
         }
        ?>
