@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/sessions.php';
+require_once __DIR__ . '/db.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,12 +27,12 @@ require_once __DIR__ . '/sessions.php';
         } else {
           ?>
             <a class="navbar-item" href="/page_2.php">
-          <?php  }
-      } else{ ?>
-        <a class="navbar-item" href="/">
-        <?php }  ?>
+            <?php  }
+        } else { ?>
+            <a class="navbar-item" href="/">
+            <?php }  ?>
 
-      <img src="/imgs/eshop.png">
+            <img src="/imgs/eshop.png">
             </a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
               <span aria-hidden="true"></span>
@@ -47,40 +48,38 @@ require_once __DIR__ . '/sessions.php';
         /**
          * array de el navbar
          */
-        $menu = [
-          ['name' => 'Productos', 'url' => './products/index.php'],
-          ['name' => 'Categorias', 'url' => './categories/index.php'],
-          ['name' => 'More', 'url' => '', 'sub_menus' => [
-            ['name' => 'Page 3', 'url' => '/page_3.php'],
-            ['name' => 'Page 4', 'url' => '/page_4.php'],
-            ['name' => 'Page 5', 'url' => '/page_5.php'],
-          ]]
-        ];
+        $menu = $category_model->chargeheader();
 
         if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
-          foreach ($menu as $link) {
-            if (array_key_exists('sub_menus', $link)) {
-        ?>
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                  <?= $link['name'] ?>
-                </a>
+          if ($_SESSION['user_admin'] == $true) {
+            foreach ($menu as $link) {
+              /**
+               * array de el navbar
+               */
+              $menus = array(
+                'name' => $link['nameca'],
+                'url' => "../categories/index.php?namefo=" . $link['nameca']
+              );
 
-                <div class="navbar-dropdown">
-                  <?php
-                  foreach ($link['sub_menus'] as $sub_menu) {
-                    echo "<a class='navbar-item' href='" . $sub_menu['url'] . "'>" . $sub_menu['name'] . "</a>";
-                  }
-                  ?>
-                </div>
-              </div>
-        <?php
-            } else {
-              echo "<a class='navbar-item' href='" . $link['url'] . "'>" . $link['name'] . "</a>";
-            }
-          }
-        }
+              if ($link['father_category'] == null) {
         ?>
+              <?php
+                echo "<a class='navbar-item' href='" . $menus['url'] . "'>" . $menus['name'] . "</a>";
+              }
+              ?>
+            <?php
+            }
+          } else { ?>
+            <a class="navbar-item" href="../categories/index.php">
+              Catálogo
+            </a>
+            <a class="navbar-item" href="../products/mostrarCarrito.php">
+              Carrito(<?php echo count($_SESSION['CARRITO'])?>)
+            </a>
+        <?php }
+        } ?>
+
+
       </div>
       <div class="navbar-end">
         <div class="navbar-item">

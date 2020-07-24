@@ -3,7 +3,6 @@
     <div class="media">
       <div class="media-content">
         <p class="title is-4"><?= $category['name'] ?></p>
-        <p class="title is-4"><?= $category['father_category'] ?></p>
       </div>
     </div>
     <div class="content">

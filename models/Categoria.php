@@ -16,6 +16,14 @@ class Categoria
     {
         return $this->connection->runQuery('SELECT id,name FROM categories');
     }
+    public function chargeselectca()
+    {
+        return $this->connection->runQuery('SELECT id,name FROM categories where father_category is null');
+    }
+    public function chargeheader()
+    {
+        return $this->connection->runQuery('SELECT id,name as nameca,father_category FROM categories');
+    }
     public function create($name, $father_category)
     {
         if ($father_category == null) {
@@ -29,12 +37,13 @@ class Categoria
         }
     }
 
-    public function read($name = '')
+    public function read($name)
     {
         $params = [];
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT c1.id, c1.name from categories c1 inner join( select c2.id, c2.name 
+         from categories c2 where father_category is null) c2 on c1.father_category = c2.id";
         if ($name) {
-            $sql .= " WHERE name ilike $1 ";
+            $sql .= " and c2.name ilike $1 ";
             array_push($params, "%$name%");
         }
         $sql .= " ORDER BY id";

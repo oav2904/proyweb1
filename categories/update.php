@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'] ?? '';
     $father_category = $_POST['father_category'] ?? null;
     $category_model->update($id, $name, $father_category);
+    exit;
     return header("Location: /categories");
 }
 

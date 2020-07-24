@@ -13,7 +13,19 @@
             <div class="field">
                 <label>Categoría Padre</label>
                 <div class="control">
-                    <input type="text" name="father_category" value="<?= $category['father_category'] ?? null ?>">
+                    <select name="father_category">
+                      <option value="<?= $category['father_category'] ?? null ?>"><?= $category['name'] ?? 'Selecione' ?></option>   
+                        <?php
+                        $category = $category_model->chargeselectca();
+                        if ($category) {
+                            foreach ($category as $categories) {
+                        ?>
+                                <option value="<?= $categories['id'] ?>"><?= $categories['name'] ?></option>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="field is-grouped">

@@ -2,6 +2,9 @@
 require_once '../shared/header.php';
 require_once '../shared/db.php';
 require_once '../shared/guard.php';
+require_once '../shared/sessions.php';
+require_once './carrito.php';
+
 
 ?>
 

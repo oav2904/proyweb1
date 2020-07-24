@@ -21,7 +21,14 @@
       <?php
       } elseif ($_SESSION['user_admin'] == 'f') {
       ?>
-        <a class="button is-link card-footer-item" href="">Carrito</a>
+      <form method="post">
+        <input type="hidden" name="id" value="<?= $product['id'] ?>">
+        <input type="hidden" name="nombre" value="<?= $product['producto'] ?>">
+        <input type="hidden" name="precio" value="<?= $product['price'] ?>">
+        <input type="hidden" name="cantidad" value= "<?php echo 1; ?>">
+        <button name="btnCarrito" value="Agregar" class="button is-link card-footer-item" type="submit" >Carrito</button>
+      </form>
+        
         <a class="button is-danger card-footer-item" href="">Ver</a>
       <?php
       }
