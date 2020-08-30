@@ -118,7 +118,7 @@ class Producto
      */
     public function reducirStock($stock,$id)
     {
-        return $this->connection->runQuery('UPDATE products stock = stock - $1 from products where id = $2',[$stock,$id]);
+        return $this->connection->runQuery('UPDATE products set stock = stock - $1 where id = $2',[$stock,$id]);
     }
     /**
      * Funcion que permite revisar si el stock enviado por parametro es menos o igual al enviado

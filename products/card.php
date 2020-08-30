@@ -6,7 +6,7 @@
       </figure>
       <div class="media-content">
         <p class="title is-4"><?= $product['producto'] ?></p>
-        <p class="title is-4">Valor</p>
+        <p class="title is-4"><?=$product['description']?></p>
         <p class="title is-5"><?= $product['price'] ?></p>
       </div>
 

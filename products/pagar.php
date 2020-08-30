@@ -18,10 +18,11 @@ if ($_POST) {
     $id = $results[0]['id'];
     $stock = $product_model->stock($producto['id']);
     foreach ($_SESSION['CARRITO'] as $indice => $producto) {
-        if($stock['stock']> $producto['cantidad']){
+        if($stock > $producto['cantidad']){
             $factura_model->createdetalle($id, $producto['id'], $producto['nombre'], $producto['precio'], $producto['cantidad']);
             $product_model->reducirStock($producto['cantidad'],$producto['id']);
             unset($_SESSION['CARRITO']);
     }
 }
+return header("Location: /products");
 }

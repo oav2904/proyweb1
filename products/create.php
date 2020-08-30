@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $images->resize(280, 280);
                 $images->save($rutaSubida);
                 $image = $rutaSubida;
-                $product_model->create($id, $name, $description, $image, $stock, $price, $category);
+                $product_model->create($name, $description, $image, $stock, $price, $category);
             } else {
 
                 return false;
